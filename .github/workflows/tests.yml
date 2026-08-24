@@ -1,0 +1,25 @@
+# Autograder for this Skill Builder.
+#
+# Runs on pull requests and on any branch except main. The pull request is the
+# submission, so that is where the green check belongs. Skipping main keeps the
+# template repo from showing a permanent red X over its deliberately
+# incomplete starting state.
+name: tests
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Run tests
+        run: ./mvnw -B test
