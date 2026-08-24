@@ -113,6 +113,19 @@ If a test fails, don't just guess!
 
 ## Submission
 
-Please submit the PowerPill.java file on CodeGrade when you have completed the work.  The Game Guru will then score your work and add it the dev release if it is worthy.
+**The pull request is the submission.** Nothing gets uploaded anywhere.
+
+```
+git switch -c assignment      # work on a branch, never on main
+git add -A && git commit -m "..."   # small commits, real messages, as you go
+git push -u origin assignment
+```
+
+Then open a pull request into `main` on GitHub. CI runs on it and shows a green check or
+a red X. If you need to fix something, push to the same branch and the pull request
+updates itself.
+
+Your commit history is part of what is graded — incremental work with real messages, not
+one dump at the deadline.
 
 <span style="font-size:2em;color:green;">Happy Coding!</span>
