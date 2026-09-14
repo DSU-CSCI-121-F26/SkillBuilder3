@@ -75,7 +75,7 @@ For example,
 
 ```
 PowerPill p = new PowerPill("Pink", 20);
-System.out.printn(p);
+System.out.println(p);
 ```
 
 results in,
@@ -113,17 +113,75 @@ If a test fails, don't just guess!
 
 ## Submission
 
-**The pull request is the submission.** Nothing gets uploaded anywhere.
+**The pull request is the submission.** Nothing gets uploaded anywhere. And it has to be a pull
+request **in your own fork** — committed is not submitted, and pushed is not submitted either.
 
-```
-git switch -c assignment      # work on a branch, never on main
-git add -A && git commit -m "..."   # small commits, real messages, as you go
-git push -u origin assignment
+The full walkthrough, with every error message:
+[Git — pull it down, hand it in](https://github.com/DSU-CSCI-121-F26/recitation-notes/blob/main/git-workflow.md).
+
+### 1 · Fork — not *Use this template*
+
+At the top of this page: **Fork** → **Create fork**.
+
+> **⚠️ Do not click the green _Use this template_ button.** That makes a copy that is not a fork,
+> and if it is private I cannot see it — so as far as grading is concerned, you never started.
+
+The URL becomes `github.com/`**`your-username`**`/SkillBuilder3`. **That is how you know it
+worked.**
+
+### 2 · Clone **your** fork
+
+Green **Code** button on **your** fork → **HTTPS** → copy.
+
+```bash
+git clone https://github.com/your-username/SkillBuilder3.git
+cd SkillBuilder3
+git remote -v          # must say YOUR username, not DSU-CSCI-121-F26
 ```
 
-Then open a pull request into `main` on GitHub. CI runs on it and shows a green check or
-a red X. If you need to fix something, push to the same branch and the pull request
-updates itself.
+**Read what `git remote -v` prints.** If it says `DSU-CSCI-121-F26`, you cloned my copy, and your
+push will fail with `Permission denied`. Fix it without losing anything:
+
+```bash
+git remote set-url origin https://github.com/your-username/SkillBuilder3.git
+```
+
+### 3 · Branch, then commit and push as you go
+
+```bash
+git switch -c assignment             # BEFORE you write anything — never work on main
+./mvnw test                          # mvnw.cmd test on Windows
+git add -A && git commit -m "..."    # small commits, real messages, as you go
+git push -u origin assignment        # after the first time, just: git push
+```
+
+**`Authentication failed` is always the token.** Your GitHub password does not work for pushing.
+GitHub → **Settings** → **Developer settings** → **Personal access tokens** → **Tokens (classic)**
+→ **Generate new token** → check **`repo`** → **Generate**. Copy it immediately — it is shown once
+— and paste it where Git asks for the password.
+
+### 4 · Open the pull request — in **your** fork
+
+Reload your fork → **Compare & pull request**.
+
+> **⚠️ GitHub sets the base repository to `DSU-CSCI-121-F26/SkillBuilder3` by default. Change it
+> to yours.** Before you click **Create**, read the sentence GitHub prints. Your username has to be
+> on **both** sides:
+>
+> **`your-username`** wants to merge N commits into **`your-username:main`** from
+> **`your-username:assignment`**
+>
+> A pull request opened against `DSU-CSCI-121-F26` is not a submission.
+
+Then: **Create pull request** → **leave it open, do not merge it** → **Actions** tab → *I
+understand my workflows, go ahead and enable them* (without this your PR never gets a check) →
+**post the PR link in Canvas.**
+
+### Submit early — red is fine
+
+Open the PR as soon as your **skeleton methods** compile, with the tests still red. From then on,
+every `git push` updates **the same pull request** by itself — never open a second one. On the night
+it is due, there is nothing left to go wrong except the Java.
 
 Your commit history is part of what is graded — incremental work with real messages, not
 one dump at the deadline.
